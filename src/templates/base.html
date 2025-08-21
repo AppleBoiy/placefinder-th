@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ title or 'Thai Zipcode Placefinder' }}</title>
+    <style>
+      body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; margin: 24px; }
+      a { color: #2563eb; text-decoration: none; }
+      nav a { margin-right: 12px; }
+      .card { max-width: 900px; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px; }
+      input, select, button { padding: 8px 10px; font-size: 14px; }
+      button { background: #2563eb; color: #fff; border: 0; border-radius: 6px; cursor: pointer; }
+      table { border-collapse: collapse; width: 100%; }
+      th, td { text-align: left; padding: 8px; border-bottom: 1px solid #e5e7eb; }
+      .muted { color: #64748b; font-size: 14px; }
+      .error { color: #b91c1c; }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="{{ url_for('home_page') }}">Home</a>
+      <a href="{{ url_for('ui_zipcode') }}">Zipcode</a>
+      <a href="{{ url_for('ui_search') }}">Search</a>
+      <a href="{{ url_for('ui_reverse') }}">Reverse</a>
+      <a href="{{ url_for('ui_suggest') }}">Suggest</a>
+      <a href="/docs" target="_blank" rel="noopener">API Docs</a>
+    </nav>
+    <main class="card">
+      {% block content %}{% endblock %}
+    </main>
+    <p class="muted">UI is English. Data labels are in Thai as provided by dataset.</p>
+  </body>
+  </html>
+
+

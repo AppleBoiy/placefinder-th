@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Forward search</h2>
+  <form method="get" action="{{ url_for('ui_search') }}">
+    <div>
+      <label>Query <input type="text" name="q" value="{{ params.q }}" placeholder="province/amphoe/district or zipcode prefix"></label>
+    </div>
+    <div>
+      <label>Zipcode <input type="text" name="code" value="{{ params.code }}" maxlength="5"></label>
+      <label>Province <input type="text" name="province" value="{{ params.province }}"></label>
+      <label>Amphoe/Khet <input type="text" name="amphoe" value="{{ params.amphoe }}"></label>
+      <label>Subdistrict <input type="text" name="district" value="{{ params.district }}"></label>
+      <label>Fuzzy <select name="fuzzy"><option value="false" {% if params.fuzzy!='true' %}selected{% endif %}>false</option><option value="true" {% if params.fuzzy=='true' %}selected{% endif %}>true</option></select></label>
+    </div>
+    <button type="submit">Search</button>
+  </form>
+  {% if results is not none %}
+    <p>{{ total }} results</p>
+    <table>
+      <thead><tr><th>Zipcode</th><th>Subdistrict</th><th>District</th><th>Province</th></tr></thead>
+      <tbody>
+        {% for r in results %}
+        <tr><td>{{ r.code }}</td><td>{{ r.district }}</td><td>{{ r.amphoe }}</td><td>{{ r.province }}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+{% endblock %}
+
+

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Suggestions</h2>
+  <form method="get" action="{{ url_for('ui_suggest') }}">
+    <label>Query <input type="text" name="q" value="{{ q }}" placeholder="type a province/amphoe/district prefix"></label>
+    <button type="submit">Suggest</button>
+  </form>
+  {% if suggestions %}
+    <div style="display:flex; gap:24px;">
+      <div>
+        <h3>Zipcodes</h3>
+        <ul>{% for z in suggestions.zipcodes %}<li>{{ z }}</li>{% endfor %}</ul>
+      </div>
+      <div>
+        <h3>Provinces</h3>
+        <ul>{% for p in suggestions.provinces %}<li>{{ p }}</li>{% endfor %}</ul>
+      </div>
+      <div>
+        <h3>Amphoes</h3>
+        <ul>{% for a in suggestions.amphoes %}<li>{{ a }}</li>{% endfor %}</ul>
+      </div>
+      <div>
+        <h3>Subdistricts</h3>
+        <ul>{% for d in suggestions.districts %}<li>{{ d }}</li>{% endfor %}</ul>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}
+
+

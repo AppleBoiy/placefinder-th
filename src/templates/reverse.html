@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Reverse lookup (to zipcodes)</h2>
+  <form method="get" action="{{ url_for('ui_reverse') }}">
+    <label>Province <input type="text" name="province" value="{{ params.province }}"></label>
+    <label>Amphoe/Khet <input type="text" name="amphoe" value="{{ params.amphoe }}"></label>
+    <label>Subdistrict <input type="text" name="district" value="{{ params.district }}"></label>
+    <label>Fuzzy <select name="fuzzy"><option value="false" {% if params.fuzzy!='true' %}selected{% endif %}>false</option><option value="true" {% if params.fuzzy=='true' %}selected{% endif %}>true</option></select></label>
+    <button type="submit">Search</button>
+  </form>
+  {% if results is not none %}
+    <table>
+      <thead><tr><th>Zipcode</th><th>Locations</th></tr></thead>
+      <tbody>
+        {% for code, locs in results %}
+        <tr>
+          <td>{{ code }}</td>
+          <td>
+            <ul>
+            {% for loc in locs %}
+              <li>{{ loc.district }} · {{ loc.amphoe }} · {{ loc.province }}</li>
+            {% endfor %}
+            </ul>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+{% endblock %}
+
+

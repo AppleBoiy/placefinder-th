@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Zipcode lookup</h2>
+  <form method="get" action="{{ url_for('ui_zipcode') }}">
+    <label>Zipcode: <input type="text" name="code" value="{{ code }}" maxlength="5" pattern="\d{5}" required></label>
+    <button type="submit">Search</button>
+  </form>
+  {% if error %}
+    <p class="error">{{ error }}</p>
+  {% endif %}
+  {% if data %}
+    <h3>Results for {{ data.code }}</h3>
+    <table>
+      <thead><tr><th>Subdistrict</th><th>District</th><th>Province</th></tr></thead>
+      <tbody>
+        {% for loc in data.locations %}
+        <tr><td>{{ loc.district }}</td><td>{{ loc.amphoe }}</td><td>{{ loc.province }}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+{% endblock %}
+
+
