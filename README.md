@@ -2,16 +2,13 @@
 
 A simple project to look up Thai places by zipcode and search addresses, with a clean separation between a REST API and a minimal web UI (Flask + Jinja).
 
-
-
-
 ## Quick start
 
 ```bash
 cd /Users/ive/tmp/placefinder-th
 python3 -m venv .venv
 source .venv/bin/activate
-pip install -r src/requirements.txt
+pip install -r requirements.txt
 
 # run the server on http://localhost:3000
 python src/run.py
